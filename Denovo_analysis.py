@@ -1,11 +1,46 @@
+import datetime
 import sys
 import subprocess
 import os
 import glob
+import time
 
-### Argv checking
+os.system("clear")
+time.sleep(2)
+
+now = datetime.datetime.now()
+nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
+print " " 
+print "RUNNING AT ",
+print(nowDatetime)  # 2015-04-19 12:11:32
+time.sleep(1)
+
+### Argv checking'
+
+print "-------------------------------------------------------------------------------------"
+time.sleep(0.1)
+print " " 
+time.sleep(0.1)
+print "     _    _   _    _    _  __   ______ ___ ____         ____ _____  _    ____ _____  "
+time.sleep(0.1)
+print "    / \  | \ | |  / \  | | \ \ / / ___|_ _/ ___|       / ___|_   _|/ \  |  _ \_   _| " 
+time.sleep(0.1)
+print "   / _ \ |  \| | / _ \ | |  \ V /\___ \| |\___ \       \___ \ | | / _ \ | |_) || |   "
+time.sleep(0.1)
+print "  / ___ \| |\  |/ ___ \| |___| |  ___) | | ___) |       ___) || |/ ___ \|  _ < | |   " 
+time.sleep(0.1)
+print " /_/   \_\_| \_/_/   \_\_____|_| |____/___|____/       |____/ |_/_/   \_\_| \_\|_|   "
+time.sleep(0.1)
+print " "
+time.sleep(0.1)
+print " " 
+time.sleep(0.1)
+print "-------------------------------------------------------------------------------------"
+
+time.sleep(3)
+
 if len(sys.argv) != 5:
-    print "------------------------\nUSAGE :: python temp.py [Left.fq] [Right.fq] [CPU] [Memory] \n ------------------------"
+    print "\n------------------------\nUSAGE :: python Denovo_analysis.py [Left.fq] [Right.fq] [CPU] [Memory(Gb)] \n ------------------------"
     exit()
 
 
@@ -18,9 +53,50 @@ Home = subprocess.check_output("pwd", shell=True)
 HomeDir = Home.split()[0]
 
 
-
 os.system("mkdir Trim_out")
+for i in range(30):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+
+print " "
+print " GENERATE [Trim_out] DIRECTORY!"
 os.system("mkdir Trim_out/unpaired")
+time.sleep(1)
+for i in range(30):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+
+print " "
+print " GENERATE [Trim_out/unpaired] DIRECTORY!"
+time.sleep(1)
+for i in range(30):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+print " "
+print " "
+print " "
+print "NEXT STEP LOADING.."
+time.sleep(3)
+os.system("clear")
+
+print "-----------------------------------------------------------------"
+print " " 
+print "   ___              _ _ _             ____ _               _     "
+print "  / _ \ _   _  __ _| (_) |_ _   _    / ___| |__   ___  ___| | __ "
+print " | | | | | | |/ _` | | | __| | | |  | |   | '_ \ / _ \/ __| |/ / "
+print " | |_| | |_| | (_| | | | |_| |_| |  | |___| | | |  __/ (__|   <  "
+print "  \__\_\\__,_|\__,_|_|_|\__|\__, |   \____|_| |_|\___|\___|_|\_\ "
+print " "
+print " " 
+print "-----------------------------------------------------------------"
+
+time.sleep(3)
 
 ### Trimmomatic START-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 minLen = 36
@@ -41,12 +117,37 @@ Rs = Right_fq.split("raw/")
 
 
 os.system("java -jar " + HomeDir + "/toolbox/Trimmomatic-0.36/trimmomatic-0.36.jar PE -phred33 " + Left_fq + " " + Right_fq + " Trim_out/Trim_out_paired_" + Fs[1] + " Trim_out/unpaired/Trim_out_unpaired_" + Fs[1] + " Trim_out/Trim_out_paired_" + Rs[1] + " Trim_out/unpaired/Trim_out_unpaired_" + Rs[1] + " ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:" + str(minLen))
+time.sleep(5)
+
+for i in range(50):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+
+print " "
+print " "
+print " "
+print "NEXT STEP LOADING .."
+time.sleep(3)
+time.sleep(1)
+os.system("clear")
 
 ### Trimmomatic END-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+print "------------------------------------------------------------------------------"
+print " " 
+print "  _____     _       _ _           ____                ____  _             _   "
+print " |_   _| __(_)_ __ (_) |_ _   _  |  _ \ _   _ _ __   / ___|| |_ __ _ _ __| |_ "
+print "   | || '__| | '_ \| | __| | | | | |_) | | | | '_ \  \___ \| __/ _` | '__| __|"
+print "   | || |  | | | | | | |_| |_| | |  _ <| |_| | | | |  ___) | |_ (_| | |  | |_ "
+print "   |_||_|  |_|_| |_|_|\__|\__, | |_| \_\\__,_|_| |_| |____/ \__\__,_|_|   \__|"
+print "                          |___/                                               "
+print " " 
+print "------------------------------------------------------------------------------"
 
-
+time.sleep(5)
 
 ### Trinity START----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -54,13 +155,48 @@ os.system("java -jar " + HomeDir + "/toolbox/Trimmomatic-0.36/trimmomatic-0.36.j
 os.system(HomeDir + "/toolbox/trinityrnaseq-Trinity-v2.4.0/Trinity --seqType fq --left Trim_out/Trim_out_paired_" + Fs[1] + " --right Trim_out/Trim_out_paired_" + Rs[1] + " --output trinity_output --CPU " + CPU + " --max_memory " + Memory + " --bypass_java_version_check")
 
 
+time.sleep(5)
+
+for i in range(50):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+
+print " "
+print " "
+print " "
+print "NEXT STEP LOADING .."
+time.sleep(3)
+os.system("clear")
+
 ### Trinity END------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+print "---------------------------------------------------------------------------------------------------------------"
+print " " 
+print "  _____                    ____                     _             ____                ____  _             _   "
+print " |_   _| __ __ _ _ __  ___|  _ \  ___  ___ ___   __| | ___ _ __  |  _ \ _   _ _ __   / ___|| |_ __ _ _ __| |_ "
+print "   | || '__/ _` | '_ \/ __| | | |/ _ \/ __/ _ \ / _` |/ _ \ '__| | |_) | | | | '_ \  \___ \| __/ _` | '__| __|"
+print "   | || | | (_| | | | \__ \ |_| |  __/ (__ (_) | (_| |  __/ |    |  _ <| |_| | | | |  ___) | |_ (_| | |  | |_ "
+print "   |_||_|  \__,_|_| |_|___/____/ \___|\___\___/ \__,_|\___|_|    |_| \_\\__,_|_| |_| |____/ \__\__,_|_|   \__|"
+print " " 
+print " " 
+print "--------------------------------------------------------------------------------------------------------------"
 
 # making directory TransDeocoder and moving
 os.system("mkdir TransDecoder")
+for i in range(30):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
 
+print " "
+print " GENERATE [TransDecoder] DIRECTORY!"
+time.sleep(1)
+
+time.sleep(5)
 
 ### TransDecoder START----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -86,11 +222,49 @@ os.system(HomeDir + "/toolbox/cd-hit-v4.6.7-2017-0501/cd-hit -i " + HomeDir + "/
 ### CD-HIT END-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+time.sleep(5)
+
+for i in range(50):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+time.sleep(1)
+time.sleep(1)
+print " "
+print " "
+print " "
+print "NEXT STEP LOADING .."
+time.sleep(3)
+os.system("clear")
+
+
 
 ### Annotation START-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+print "------------------------------------------------"
+print " " 
+print "  ____  ____    ____                      _     "
+print " |  _ \| __ )  / ___|  ___  __ _ _ __ ___| |__  "
+print " | | | |  _ \  \___ \ / _ \/ _` | '__/ __| '_ \ "
+print " | |_| | |_) |  ___) |  __/ (_| | | | (__| | | |"
+print " |____/|____/  |____/ \___|\__,_|_|  \___|_| |_|"
+print " " 
+print " " 
+print "------------------------------------------------"
 
+time.sleep(5)
+print "DATABASE UPLOADING"
 os.system(HomeDir + "/toolbox/ncbi-blast-2.6.0+/bin/blastp -query " + HomeDir + "/Trinity.fasta.transdecoder.pep.cdhit -db " + HomeDir + "/DB/uniprot_sprot.fasta -evalue 1e-10 -num_threads " + CPU + " -max_target_seqs 1 -outfmt 7 > " + HomeDir + "/Annotation_blastp_out_7")
+
+time.sleep(5)
+
+for i in range(50):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
+
 
 
 ### Annotation END--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -225,7 +399,23 @@ A.close()
 B.close()
 o.close()
 
+os.system("cat " + HomeDir + "/Annotation_blastp_out_hits_DB_ID")
+time.sleep(10)
+for i in range(50):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
 
+print " "
+print " "
+print " "
+print "NEXT STEP LOADING .."
+print " " 
+time.sleep(3)
+os.system("clear")
+
+"""
 
 # hits_DB_ID_Add_Length >>> hits_DB_ID_Add_Length_SortN
 os.system("cat " + BLAST_out7.split("7")[0] + "hits_DB_ID_Add_Length |sort -k 1 -n -r > " + BLAST_out7.split("7")[0] + "hits_DB_ID_Add_Length_SortN")
@@ -253,22 +443,41 @@ while 1:
                 if Aline.split()[0] == Bline.split()[2].split("|")[2].split("_")[0]:
                         o.write(Bline)
                         break
+"""
+print "---------------------------------------"
+print " " 
+print "  _____ _       _     _              _ "
+print " |  ___(_)_ __ (_)___| |__   ___  __| |"
+print " | |_  | | '_ \| / __| '_ \ / _ \/ _` |"
+print " |  _| | | | | | \__ \ | | |  __/ (_| |"
+print " |_|   |_|_| |_|_|___/_| |_|\___|\__,_|"
+print " "
+print " " 
+print "---------------------------------------"
 
+time.sleep(5)
+for i in range(50):
+    dot = "."
+    sys.stdout.write("\r" +  dot*i)
+    time.sleep(0.02)
+    sys.stdout.flush()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print " "
+print " "
+print " "
+print "WRITING FILES .."
+print " " 
+time.sleep(3)
+nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
+print "FINISHED",
+print(nowDatetime)  # 2015-04-19 12:11:32
+time.sleep(3)
+print "  ____                                                                     ___                                          _       "
+print " | __ ) _   _     ___ _   _ _ __   __ _        __ ___      _____  _ __    ( _ )    ___  ___  ___  _ __   __ _ _ __ ___ (_)_ __  "
+print " |  _ \| | | |   / __| | | | '_ \ / _` |_____ / _` \ \ /\ / / _ \| '_ \   / _ \/\ / __|/ _ \/ _ \| '_ \ / _` | '_ ` _ \| | '_ \ "
+print " | |_) | |_| |   \__ \ |_| | | | | (_| |_____| (_| |\ V  V / (_) | | | | | (_>  < \__ \  __/ (_) | | | | (_| | | | | | | | | | |"
+print " |____/ \__, |   |___/\__,_|_| |_|\__, |      \__, | \_/\_/ \___/|_| |_|  \___/\/ |___/\___|\___/|_| |_|\__, |_| |_| |_|_|_| |_|"
+print "        |___/                     |___/       |___/                                                     |___/"
 
 
 
